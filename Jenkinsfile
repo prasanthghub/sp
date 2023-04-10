@@ -1,10 +1,12 @@
 pipeline {
-    agent any
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/prasanthghub/springboot.git'
+	agent any
+	tools {
+    	maven 'my_mvn'
+	}
+	stages {
+    	stage("Checkout") {   
+        	steps {               	 
+            	git branch: 'main', url: 'https://github.com/prasanthghub/springboot.git'
             }
         }
         
