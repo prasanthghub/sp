@@ -8,7 +8,7 @@ pipeline {
             }
         }
         
-        stage('Compile and Test (slave-1)') {
+        stage('Compile (slave-1)') {
             agent {
                 node {
                     label 'node1'
@@ -19,7 +19,7 @@ pipeline {
             }
         }
         
-        stage('Compile and Test (slave-2)') {
+        stage('Compile (slave-2)') {
             agent {
                 node {
                     label 'node2'
