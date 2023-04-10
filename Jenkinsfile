@@ -1,17 +1,35 @@
 pipeline {
     agent any
+    
     stages {
-        stage('Compile and Test on Node 1') {
-            agent { label 'node1' }
+        stage('Checkout') {
             steps {
-                sh 'mvn clean compile test'
+                git 'https://github.com/prasanthghub/springboot.git'
             }
         }
-        stage('Compile and Test on Node 2') {
-            agent { label 'node2' }
+        
+        stage('Compile and Test (slave-1)') {
+            agent {
+                node {
+                    label 'node1'
+                }
+            }
             steps {
-                sh 'mvn clean compile test'
+                sh 'mvn clean compile '
             }
         }
+        
+        stage('Compile and Test (slave-2)') {
+            agent {
+                node {
+                    label 'node2'
+                }
+            }
+            steps {
+                sh 'mvn clean compile '
+            }
+        }
+        
+        
     }
 }
